@@ -20,9 +20,6 @@ public class ClickService {
     private PathStatisticsRepository pathStatisticsRepository;
 
     public void recordClick(HttpServletRequest request, String path) {
-        if (path.equals("styles.css")) {
-            return;
-        }
 
         String ipAddress = getClientIp(request);
         String region = request.getHeader("X-Region");
