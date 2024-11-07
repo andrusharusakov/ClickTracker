@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Статистика переходов</title>
+</head>
+<body>
+<div class="container">
+    <h1>Статистика переходов</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Путь</th>
+            <th>Всего переходов</th>
+            <th>Уникальные переходы</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stat : ${statistics}">
+            <td th:text="${stat.path}">/promo/example</td>
+            <td th:text="${stat.totalClicks}">0</td>
+            <td th:text="${stat.uniqueClicks}">0</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
