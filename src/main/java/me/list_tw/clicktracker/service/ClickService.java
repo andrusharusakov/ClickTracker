@@ -20,7 +20,6 @@ public class ClickService {
     private PathStatisticsRepository pathStatisticsRepository;
 
     public void recordClick(HttpServletRequest request, String path) {
-
         String ipAddress = getClientIp(request);
         String region = request.getHeader("X-Region");
         String device = request.getHeader("User-Agent");
@@ -61,7 +60,6 @@ public class ClickService {
     }
 
     private boolean isUniqueVisitor(String ipAddress, String path) {
-        List<ClickRecord> records = clickRecordRepository.findByIpAddressAndPath(ipAddress, path);
-        return records.isEmpty();
+        return clickRecordRepository.findByIpAddressAndPath(ipAddress, path).isEmpty();
     }
 }
