@@ -47,7 +47,7 @@ public class ClickService {
             if (isUniqueVisitor(ipAddress, path)) {
                 stats.setUniqueClicks(stats.getUniqueClicks() + 1);
             }
-            System.out.println(ipAddress + path);
+            System.out.println(ipAddress + " " + path + " " + isUniqueVisitor(ipAddress, path));
         }
         pathStatisticsRepository.save(stats);
     }
