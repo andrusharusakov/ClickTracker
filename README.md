@@ -30,6 +30,6 @@ Click Tracker — это веб-сервис, разработанный на Sp
 Сначала клонируйте репозиторий:
 
 ```bash
-git clone https://github.com/yourusername/click-tracker.git
-cd click-tracker
+git clone https://github.com/andrusharusakov/ClickTracker.git
+cd ClickTracker
 ```
