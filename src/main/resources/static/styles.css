@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-image: url('https://steamuserimages-a.akamaihd.net/ugc/197427583368162333/AAD02F7EB1C1B5D16BC97B746E06DC317B0A7260/?imw=512&imh=288&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     height: 100vh;
     color: #e0e0e0;
     margin: 0;
