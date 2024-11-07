@@ -25,7 +25,7 @@ public class RedirectController {
 
     @GetMapping("/{promoId}")
     public void redirect(@PathVariable String promoId, HttpServletRequest request, HttpServletResponse response) {
-        String path = "/promo/" + promoId;
+        String path = promoId;
         clickService.recordClick(request, path);
         try {
             response.sendRedirect("https://leafcity.ru");

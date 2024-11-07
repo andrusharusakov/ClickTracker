@@ -19,9 +19,9 @@ public class ClickService {
 
     public void recordClick(HttpServletRequest request, String path) {
         String ipAddress = request.getRemoteAddr();
-        String region = request.getHeader("X-Region"); // Replace with real region extraction logic
-        String device = request.getHeader("User-Agent"); // Replace with real device extraction logic
-        String browser = request.getHeader("User-Agent"); // You can parse this for better information
+        String region = request.getHeader("X-Region");
+        String device = request.getHeader("User-Agent");
+        String browser = request.getHeader("User-Agent");
 
         ClickRecord clickRecord = new ClickRecord();
         clickRecord.setIpAddress(ipAddress);
@@ -40,9 +40,14 @@ public class ClickService {
             stats.setUniqueClicks(1L);
         } else {
             stats.setTotalClicks(stats.getTotalClicks() + 1);
-            // Logic for unique clicks based on IP address would go here
-            stats.setUniqueClicks(stats.getUniqueClicks() + 1); // For simplicity, counting all as unique
+            if (!isUniqueVisitor(ipAddress, path)) {
+                stats.setUniqueClicks(stats.getUniqueClicks() + 1);
+            }
         }
         pathStatisticsRepository.save(stats);
+    }
+
+    private boolean isUniqueVisitor(String ipAddress, String path) {
+        return clickRecordRepository.findByIpAddressAndPath(ipAddress, path).isPresent();
     }
 }
