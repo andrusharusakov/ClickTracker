@@ -19,9 +19,7 @@ public class RedirectController {
     @GetMapping("/{promoId}")
     public void redirect(@PathVariable String promoId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = promoId;
-        if (!path.equals("styles.css")) {
-            clickService.recordClick(request, path);
-        }
+        clickService.recordClick(request, path);
         response.sendRedirect("https://leafcity.ru");
     }
 }
