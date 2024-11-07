@@ -25,6 +25,12 @@ public class ClickService {
         String device = request.getHeader("User-Agent");
         String browser = request.getHeader("User-Agent");
 
+        List<ClickRecord> existingRecords = clickRecordRepository.findByIpAddressAndPath(ipAddress, path);
+
+        // Проверяем, уникальный ли посетитель
+        boolean isUnique = existingRecords.isEmpty();
+
+        // Сохраняем новый ClickRecord независимо от уникальности
         ClickRecord clickRecord = new ClickRecord();
         clickRecord.setIpAddress(ipAddress);
         clickRecord.setRegion(region);
@@ -40,17 +46,17 @@ public class ClickService {
             stats = new PathStatistics();
             stats.setPath(path);
             stats.setTotalClicks(1L);
-            stats.setUniqueClicks(1L);
+            stats.setUniqueClicks(isUnique ? 1L : 0L);
         } else {
             stats = statsList.get(0);
             stats.setTotalClicks(stats.getTotalClicks() + 1);
-            if (isUniqueVisitor(ipAddress, path)) {
+            if (isUnique) {
                 stats.setUniqueClicks(stats.getUniqueClicks() + 1);
             }
-            System.out.println(ipAddress + " " + path + " " + isUniqueVisitor(ipAddress, path));
         }
         pathStatisticsRepository.save(stats);
     }
+
 
     private String getClientIp(HttpServletRequest request) {
         String xForwardedFor = request.getHeader("X-Forwarded-For");
