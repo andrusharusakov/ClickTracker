@@ -32,14 +32,4 @@ public class RedirectController {
             e.printStackTrace();
         }
     }
-
-    @Autowired
-    private PathStatisticsRepository pathStatisticsRepository;
-
-    @GetMapping("/statistics")
-    public String getStatistics(Model model) {
-        List<PathStatistics> statistics = pathStatisticsRepository.findAll();
-        model.addAttribute("statistics", statistics);
-        return "statistics";
-    }
 }
