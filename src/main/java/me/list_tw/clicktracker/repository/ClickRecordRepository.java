@@ -8,3 +8,4 @@ import java.util.List;
 public interface ClickRecordRepository extends JpaRepository<ClickRecord, Long> {
     List<ClickRecord> findByIpAddressAndPath(String ipAddress, String path);
 }
+

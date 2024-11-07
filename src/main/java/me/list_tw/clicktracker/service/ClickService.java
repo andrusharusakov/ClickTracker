@@ -60,6 +60,8 @@ public class ClickService {
     }
 
     private boolean isUniqueVisitor(String ipAddress, String path) {
-        return clickRecordRepository.findByIpAddressAndPath(ipAddress, path).isEmpty();
+        List<ClickRecord> records = clickRecordRepository.findByIpAddressAndPath(ipAddress, path);
+        return records.isEmpty();
     }
+
 }
