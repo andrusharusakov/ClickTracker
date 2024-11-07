@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/promo")
+@RequestMapping("/")
 public class RedirectController {
 
     @Autowired
