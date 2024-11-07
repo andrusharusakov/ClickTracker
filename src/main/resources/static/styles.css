@@ -1,6 +1,9 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #121212;
+    background-image: url('https://steamuserimages-a.akamaihd.net/ugc/197427583368162333/AAD02F7EB1C1B5D16BC97B746E06DC317B0A7260/?imw=512&imh=288&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: #e0e0e0;
     margin: 0;
     padding: 20px;
@@ -9,7 +12,7 @@ body {
 .container {
     max-width: 800px;
     margin: auto;
-    background: #1e1e1e;
+    background: rgba(30, 30, 30, 0.8);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
