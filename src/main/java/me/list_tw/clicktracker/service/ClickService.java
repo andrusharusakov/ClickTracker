@@ -8,6 +8,8 @@ import me.list_tw.clicktracker.repository.PathStatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClickService {
 
@@ -32,15 +34,17 @@ public class ClickService {
 
         clickRecordRepository.save(clickRecord);
 
-        PathStatistics stats = pathStatisticsRepository.findByPath(path);
-        if (stats == null) {
+        List<PathStatistics> statsList = pathStatisticsRepository.findByPath(path);
+        PathStatistics stats;
+        if (statsList.isEmpty()) {
             stats = new PathStatistics();
             stats.setPath(path);
             stats.setTotalClicks(1L);
             stats.setUniqueClicks(1L);
         } else {
+            stats = statsList.get(0);
             stats.setTotalClicks(stats.getTotalClicks() + 1);
-            if (!isUniqueVisitor(ipAddress, path)) {
+            if (isUniqueVisitor(ipAddress, path)) {
                 stats.setUniqueClicks(stats.getUniqueClicks() + 1);
             }
         }
@@ -48,6 +52,7 @@ public class ClickService {
     }
 
     private boolean isUniqueVisitor(String ipAddress, String path) {
-        return clickRecordRepository.findByIpAddressAndPath(ipAddress, path).isPresent();
+        List<ClickRecord> records = clickRecordRepository.findByIpAddressAndPath(ipAddress, path);
+        return records.isEmpty();
     }
 }
