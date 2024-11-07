@@ -17,8 +17,8 @@ public class RedirectController {
     private ClickService clickService;
 
     @GetMapping("/{promoId}")
-    public void redirect (@PathVariable String promoId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String path = promoId; // Передаем promoId как путь
+    public void redirect(@PathVariable String promoId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String path = promoId;
         clickService.recordClick(request, path);
         response.sendRedirect("https://leafcity.ru");
     }

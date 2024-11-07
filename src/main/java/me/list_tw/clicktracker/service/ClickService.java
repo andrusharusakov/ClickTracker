@@ -20,7 +20,7 @@ public class ClickService {
     private PathStatisticsRepository pathStatisticsRepository;
 
     public void recordClick(HttpServletRequest request, String path) {
-        String ipAddress = request.getRemoteAddr();
+        String ipAddress = getClientIp(request);
         String region = request.getHeader("X-Region");
         String device = request.getHeader("User-Agent");
         String browser = request.getHeader("User-Agent");
@@ -49,6 +49,14 @@ public class ClickService {
             }
         }
         pathStatisticsRepository.save(stats);
+    }
+
+    private String getClientIp(HttpServletRequest request) {
+        String xForwardedFor = request.getHeader("X-Forwarded-For");
+        if (xForwardedFor != null && !xForwardedFor.isEmpty()) {
+            return xForwardedFor.split(",")[0];
+        }
+        return request.getRemoteAddr();
     }
 
     private boolean isUniqueVisitor(String ipAddress, String path) {
