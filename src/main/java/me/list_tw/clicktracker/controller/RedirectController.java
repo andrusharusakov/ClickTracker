@@ -16,10 +16,12 @@ public class RedirectController {
     @Autowired
     private ClickService clickService;
 
-    @GetMapping("/{promoId}")
+    @GetMapping("/id/{promoId}")
     public void redirect (@PathVariable String promoId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String path = promoId; // Передаем promoId как путь
-        clickService.recordClick(request, path);
+        String path = promoId;
+        if (!path.equals("styles.css")) {
+            clickService.recordClick(request, path);
+        }
         try {
             response.sendRedirect("https://leafcity.ru");
         } catch (IOException e) {
